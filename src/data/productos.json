@@ -1,0 +1,420 @@
+[
+     {
+          "id": 1,
+          "title": "Leche Entera 1Lt",
+          "description": "Leche Pasteurizada.",
+          "code": "Windy",
+          "price": 887.5,
+          "status": true,
+          "stock": 7,
+          "category": "Leche",
+          "thumbnails": [
+               {
+                    "urlmain": "https://iocomm.000webhostapp.com/imgs/windy_leche_entera_tetra.jpg",
+                    "urlsec": "https://iocomm.000webhostapp.com/imgs/windy_leche_entera_tetrx.jpg"
+               }
+          ]
+     },
+     {
+          "id": 2,
+          "title": "Leche Descremada 1Lt",
+          "description": "Leche Pasteurizada.",
+          "code": "Windy",
+          "price": 892,
+          "status": true,
+          "stock": 7,
+          "category": "Leche",
+          "thumbnails": [
+               {
+                    "urlmain": "https://iocomm.000webhostapp.com/imgs/windy_leche_descremada_tetra.jpg",
+                    "urlsec": "https://iocomm.000webhostapp.com/imgs/windy_leche_entera_tetrx.jpg"
+               }
+          ]
+     },
+     {
+          "id": 3,
+          "title": "Queso Cremoso 1Kg",
+          "description": "Queso bajo en sodio.",
+          "code": "Windy",
+          "price": 19570,
+          "status": true,
+          "stock": 5,
+          "category": "Queso",
+          "thumbnails": [
+               {
+                    "urlmain": "https: //iocomm.000webhostapp.com/imgs/windy_queso_cuartirolo.jpg",
+                    "urlsec": "https://iocomm.000webhostapp.com/imgs/windy_leche_entera_tetrx.jpg"
+               }
+          ]
+     },
+     {
+          "id": 4,
+          "title": "Queso Port Salut 1Kg",
+          "description": "Queso Port Salut bajo en calorias.",
+          "code": "Windy",
+          "price": 20900,
+          "status": true,
+          "stock": 7,
+          "category": "Queso",
+          "thumbnails": [
+               {
+                    "urlmain": "https: //iocomm.000webhostapp.com/imgs/windy_queso_port_salut.jpg",
+                    "urlsec": "https://iocomm.000webhostapp.com/imgs/windy_leche_entera_tetrx.jpg"
+               }
+          ]
+     },
+     {
+          "id": 5,
+          "title": "Queso Rallado 400grs",
+          "description": "Queso bajo en sodio.",
+          "code": "Windy",
+          "price": 2000,
+          "status": true,
+          "stock": 10,
+          "category": "Queso",
+          "thumbnails": [
+               {
+                    "urlmain": "https: //iocomm.000webhostapp.com/imgs/windy_queso_reggianito.jpg",
+                    "urlsec": "https://iocomm.000webhostapp.com/imgs/windy_leche_entera_tetrx.jpg"
+               }
+          ]
+     },
+     {
+          "id": 6,
+          "title": "Crema de Leche 350grs",
+          "description": "Crema de Leche especial para pasteleria.",
+          "code": "Windy",
+          "price": 3850,
+          "status": true,
+          "stock": 10,
+          "category": "Crema",
+          "thumbnails": [
+               {
+                    "urlmain": "https: //iocomm.000webhostapp.com/imgs/windy_crema_de_leche.jpg",
+                    "urlsec": "https://iocomm.000webhostapp.com/imgs/windy_leche_entera_tetrx.jpg"
+               }
+          ]
+     },
+     {
+          "id": 7,
+          "title": "Dulce de Leche 1kg",
+          "description": "Dulce de Leche Clasico.",
+          "code": "Windy",
+          "price": 2500,
+          "status": true,
+          "stock": 10,
+          "category": "Dulce",
+          "thumbnails": [
+               {
+                    "urlmain": "https: //iocomm.000webhostapp.com/imgs/windy_dulce_leche_clasico_375.jpg",
+                    "urlsec": "https://iocomm.000webhostapp.com/imgs/windy_leche_entera_tetrx.jpg"
+               }
+          ]
+     },
+     {
+          "id": 8,
+          "title": "Manteca 200grs",
+          "description": "Manteca Liviana",
+          "code": "Windy",
+          "price": 3000,
+          "status": true,
+          "stock": 10,
+          "category": "Manteca",
+          "thumbnails": [
+               {
+                    "urlmain": "https: //iocomm.000webhostapp.com/imgs/windy_manteca_200.jpg",
+                    "urlsec": "https://iocomm.000webhostapp.com/imgs/windy_leche_entera_tetrx.jpg"
+               }
+          ]
+     },
+     {
+          "id": 9,
+          "title": "Yogurt Entero 1Lt",
+          "description": "Yogurt Pasteurizado.",
+          "code": "Windy",
+          "price": 1100,
+          "status": true,
+          "stock": 10,
+          "category": "Yogurt",
+          "thumbnails": [
+               {
+                    "urlmain": "https: //iocomm.000webhostapp.com/imgs/windy_yogur_durazno_light_sachet.jpg",
+                    "urlsec": "https://iocomm.000webhostapp.com/imgs/windy_leche_entera_tetrx.jpg"
+               }
+          ]
+     },
+     {
+          "id": 10,
+          "title": "Yogurt Light 1Lt",
+          "description": "Yogurt Pasteurizado.",
+          "code": "Windy",
+          "price": 1260,
+          "status": true,
+          "stock": 10,
+          "category": "Yogurt",
+          "thumbnails": [
+               {
+                    "urlmain": "https: //iocomm.000webhostapp.com/imgs/windy_yogur_vainilla_sachet.jpg",
+                    "urlsec": "https://iocomm.000webhostapp.com/imgs/windy_leche_entera_tetrx.jpg"
+               }
+          ]
+     },
+     {
+          "id": 11,
+          "title": "Yogurt Entero Vainilla 1Lt Tetra",
+          "description": "Yogurt Pasteurizado.",
+          "code": "Ilolay",
+          "price": 1400,
+          "status": true,
+          "stock": 10,
+          "category": "Yogurt",
+          "thumbnails": [
+               {
+                    "urlmain": "https: //iocomm.000webhostapp.com/imgs/ilolay_yogur_vainilla_tetrapack.png",
+                    "urlsec": "https://iocomm.000webhostapp.com/imgs/windy_leche_entera_tetrx.jpg"
+               }
+          ]
+     },
+     {
+          "id": 12,
+          "title": "Yogurt Light Frutilla 1Lt Tetra",
+          "description": "Yogurt Pasteurizado.",
+          "code": "Ilolay",
+          "price": 1260,
+          "status": true,
+          "stock": 10,
+          "category": "Yogurt",
+          "thumbnails": [
+               {
+                    "urlmain": "https: //iocomm.000webhostapp.com/imgs/ilolay_yogur_frutilla_tetrapack.png",
+                    "urlsec": "https://iocomm.000webhostapp.com/imgs/windy_leche_entera_tetrx.jpg"
+               }
+          ]
+     },
+     {
+          "id": 13,
+          "title": "Dulce de Membrillo 500gr",
+          "description": "Dulce de Membrillo 500gr Dulcor tradicional",
+          "code": "Dulcor",
+          "price": 1400,
+          "status": true,
+          "stock": 7,
+          "category": "Dulce",
+          "thumbnails": [
+               {
+                    "urlmain": "https: //iocomm.000webhostapp.com/imgs/dulce-de-membrillo-dulcor.png",
+                    "urlsec": "https://iocomm.000webhostapp.com/imgs/windy_leche_entera_tetrx.jpg"
+               }
+          ]
+     },
+     {
+          "id": 14,
+          "title": "Dulce de Batata 500gr",
+          "description": "Dulce de Batata 500gr Dulcor tradicional",
+          "code": "Dulcor",
+          "price": 1200,
+          "status": true,
+          "stock": 3,
+          "category": "Dulce",
+          "thumbnails": [
+               {
+                    "urlmain": "https: //iocomm.000webhostapp.com/imgs/dulce-de-batata-dulcor.png",
+                    "urlsec": "https://iocomm.000webhostapp.com/imgs/windy_leche_entera_tetrx.jpg"
+               }
+          ]
+     },
+     {
+          "id": 15,
+          "title": "Cafe Gold Equilibrado 8 250gr",
+          "description": "NESCAFE Gold Equilibrado 8 es un café redondo tostado molido de cuerpo medio con notas dulces y textura cremosa en flowpack de 250gr.",
+          "code": "Nescafe",
+          "price": 19000,
+          "status": true,
+          "stock": 3,
+          "category": "Cafe",
+          "thumbnails": [
+               {
+                    "urlmain": "https: //iocomm.000webhostapp.com/imgs/nescafe-gold-equilibrado_8.png",
+                    "urlsec": "https://iocomm.000webhostapp.com/imgs/windy_leche_entera_tetrx.jpg"
+               }
+          ]
+     },
+     {
+          "id": 16,
+          "title": "Cafe Gold Intenso 9 250gr",
+          "description": "NESCAFE Gold Intenso 9 es un café intenso con notas tostadas junto a un aroma que nos reucerda a cacao y caramelo en flowpack de 250gr.",
+          "code": "Nescafe",
+          "price": 21000,
+          "status": true,
+          "stock": 3,
+          "category": "Cafe",
+          "thumbnails": [
+               {
+                    "urlmain": "https: //iocomm.000webhostapp.com/imgs/nescafe-gold-intenso_9.png",
+                    "urlsec": "https://iocomm.000webhostapp.com/imgs/windy_leche_entera_tetrx.jpg"
+               }
+          ]
+     },
+     {
+          "id": 17,
+          "title": "Cafe Gold Original 7 100gr",
+          "description": "NESCAFE Gold Original 7 es excelencia en sabor y aroma. Una propuesta única, de sabor intenso y delicado. Tu pequeño gran lujo de cada día en frasco de 100gr.",
+          "code": "Nescafe",
+          "price": 14000,
+          "status": true,
+          "stock": 3,
+          "category": "Cafe",
+          "thumbnails": [
+               {
+                    "urlmain": "https: //iocomm.000webhostapp.com/imgs/nescafe-gold-suave_7.png",
+                    "urlsec": "https://iocomm.000webhostapp.com/imgs/windy_leche_entera_tetrx.jpg"
+               }
+          ]
+     },
+     {
+          "id": 18,
+          "title": "Cafe Gold Espresso 7 90gr",
+          "description": "NESCAFE Gold Espresso 7 te ofrece las características de un blend 100% de granos Arábicos y con una delicada crema. Una propuesta ideal para los amantes del café espresso en frasco 90gr.",
+          "code": "Nescafe",
+          "price": 14000,
+          "status": true,
+          "stock": 3,
+          "category": "Cafe",
+          "thumbnails": [
+               {
+                    "urlmain": "https: //iocomm.000webhostapp.com/imgs/nescafe-gold-espresso_7.png",
+                    "urlsec": "https://iocomm.000webhostapp.com/imgs/windy_leche_entera_tetrx.jpg"
+               }
+          ]
+     },
+     {
+          "id": 19,
+          "title": "Cafe Gold Colombia 5 100gr",
+          "description": "Nescafe Gold Colombia 5 es una propuesta diferente, de tostado suave-media. Frutado y con notas de vino, reflejando a su vez una fina acidez cítrica en frasco de 100gr.",
+          "code": "Nescafe",
+          "price": 14000,
+          "status": true,
+          "stock": 3,
+          "category": "Cafe",
+          "thumbnails": [
+               {
+                    "urlmain": "https: //iocomm.000webhostapp.com/imgs/nescafe-gold-colombia_5.png",
+                    "urlsec": "https://iocomm.000webhostapp.com/imgs/windy_leche_entera_tetrx.jpg"
+               }
+          ]
+     },
+     {
+          "id": 20,
+          "title": "Azucar Pura Caña Clasica",
+          "description": "El azúcar que te acompaña desde hace más de 115 años. Ideal para cocinar todo lo que te gusta.",
+          "code": "Ledesma",
+          "price": 760,
+          "status": true,
+          "stock": 3,
+          "category": "Azucar",
+          "thumbnails": [
+               {
+                    "urlmain": "https: //iocomm.000webhostapp.com/imgs/azucarclasica.png",
+                    "urlsec": "https://iocomm.000webhostapp.com/imgs/windy_leche_entera_tetrx.jpg"
+               }
+          ]
+     },
+     {
+          "id": 21,
+          "title": "Azucar Pura Caña Superior",
+          "description": "Un azúcar blanco refinado para que tus preparaciones, merengues y glaseados marquen la diferencia.",
+          "code": "Ledesma",
+          "price": 830,
+          "status": true,
+          "stock": 3,
+          "category": "Azucar",
+          "thumbnails": [
+               {
+                    "urlmain": "https: //iocomm.000webhostapp.com/imgs/azucarsuperior.png",
+                    "urlsec": "https://iocomm.000webhostapp.com/imgs/windy_leche_entera_tetrx.jpg"
+               }
+          ]
+     },
+     {
+          "id": 22,
+          "title": "X Azucar Pura Caña Superior",
+          "description": "Un azúcar blanco refinado para que tus preparaciones, merengues y glaseados marquen la diferencia.",
+          "code": "Ledesma",
+          "price": 830,
+          "status": true,
+          "stock": 3,
+          "category": "Azucar",
+          "thumbnails": [
+               {
+                    "urlmain": "https: //iocomm.000webhostapp.com/imgs/azucarsuperior.png",
+                    "urlsec": "https://iocomm.000webhostapp.com/imgs/windy_leche_entera_tetrx.jpg"
+               }
+          ]
+     },
+     {
+          "id": 25,
+          "title": "Queso Tybo",
+          "description": "Queso Tybo Amarillo",
+          "code": "QUES010",
+          "price": 14600,
+          "status": true,
+          "stock": 3,
+          "category": "Queso",
+          "thumbnails": []
+     },
+     {
+          "id": 26,
+          "title": "MQueso",
+          "description": "Queso Cremoso",
+          "code": "QuesoAR2",
+          "price": 14000,
+          "status": true,
+          "stock": 3,
+          "category": "Queso",
+          "thumbnails": []
+     },
+     {
+          "id": 27,
+          "title": "Mermelada Durazno 400cc",
+          "description": "Mermemlada Light",
+          "code": "MERM001",
+          "price": 14000,
+          "status": true,
+          "stock": 3,
+          "category": "Mermelada",
+          "thumbnails": []
+     },
+     {
+          "id": 28,
+          "title": "Mermelada Durazno 400cc",
+          "description": "Mermemlada",
+          "code": "MERM002",
+          "price": 11000,
+          "status": true,
+          "stock": 7,
+          "category": "Mermelada",
+          "thumbnails": []
+     },
+     {
+          "id": 29,
+          "title": "Te Premium 100g",
+          "description": "Te en saquitos",
+          "code": "TEPR001",
+          "price": 7000,
+          "status": true,
+          "stock": 7,
+          "category": "Infusion",
+          "thumbnails": []
+     },
+     {
+          "id": 30,
+          "title": "Te Boldo Premium 100g",
+          "description": "Te en saquitos",
+          "code": "TEPR002",
+          "price": 7000,
+          "status": true,
+          "stock": 7,
+          "category": "Infusion",
+          "thumbnails": []
+     }
+]
