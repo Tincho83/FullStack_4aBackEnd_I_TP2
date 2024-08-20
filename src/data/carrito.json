@@ -17,11 +17,15 @@
                },
                {
                     "product": 11,
-                    "quantity": 11
+                    "quantity": 12
                },
                {
                     "product": 10,
                     "quantity": 3
+               },
+               {
+                    "product": 14,
+                    "quantity": 1
                }
           ]
      },
@@ -68,5 +72,22 @@
                     "quantity": 3
                }
           ]
+     },
+     {
+          "id": 7,
+          "products": [
+               {
+                    "product": 14,
+                    "quantity": 2
+               },
+               {
+                    "product": 7,
+                    "quantity": 1
+               }
+          ]
+     },
+     {
+          "id": 8,
+          "products": []
      }
 ]

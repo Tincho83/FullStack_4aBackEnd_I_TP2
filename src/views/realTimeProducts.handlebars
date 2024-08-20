@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos en Tiempo Real</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const socket = io();
+
+            // Manejar la actualización de la lista de productos
+            socket.on('productAdded', (product) => {
+                const ul = document.getElementById('product-list');
+                const li = document.createElement('li');
+                li.textContent = `${product.title} - ${product.price}`;
+                ul.appendChild(li);
+            });
+
+            socket.on('productDeleted', (id) => {
+                const ul = document.getElementById('product-list');
+                const items = ul.querySelectorAll('li');
+                items.forEach((item) => {
+                    if (item.textContent.includes(`ID: ${id}`)) {
+                        ul.removeChild(item);
+                    }
+                });
+            });
+
+            // Manejar el envío de productos
+            document.getElementById('add-product-form').addEventListener('submit', (event) => {
+                event.preventDefault();
+                const title = event.target.elements.title.value;
+                const price = event.target.elements.price.value;
+
+                socket.emit('addProduct', { title, price });
+            });
+
+            // Manejar la eliminación de productos
+            document.getElementById('product-list').addEventListener('click', (event) => {
+                if (event.target.classList.contains('delete-button')) {
+                    const id = event.target.dataset.id;
+                    socket.emit('deleteProduct', id);
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Productos en Tiempo Real</h1>
+    <form id="add-product-form">
+        <input type="text" name="title" placeholder="Título" required>
+        <input type="number" name="price" placeholder="Precio" required>
+        <button type="submit">Agregar Producto</button>
+    </form>
+    <ul id="product-list">
+        {{#each products}}
+            <li>
+                {{this.title}} - {{this.price}}
+                <button class="delete-button" data-id="{{this.id}}">Eliminar</button>
+            </li>
+        {{/each}}
+    </ul>
+    <a href="/products">Ver lista de productos</a>
+</body>
+</html>
