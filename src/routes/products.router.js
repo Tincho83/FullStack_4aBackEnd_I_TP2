@@ -110,7 +110,7 @@ router.post("/", async (req, res) => {
     let existe = prods.find(prod => prod.code.toLowerCase() === code.toLowerCase());
 
     if (existe) {
-        console.log("Producto Existente: ", existe);        
+        console.log("Producto Existente: ", existe);
         res.setHeader('Content-type', 'application/json');
         return res.status(400).json({ error: `Ya existe un producto con codigo ${code}` });
     } else {
@@ -126,6 +126,11 @@ router.post("/", async (req, res) => {
 
     try {
         let prodnuevo = await ProductsManager.addProduct({ title, description, code, price, status, stock, category, thumbnails });
+
+        // B01.emito señal de nuevo producto para escuchar en realtimeproducts.js
+        req.socket.emit("nuevoProducto", { title, description, code, price, status, stock, category, thumbnails });
+        //req.socket.broadcast.emit("ProductoAgregado", prodnuevo); // Agrega esta línea
+        console.log("Evento *nuevoProducto* emitido");
 
         res.setHeader('Content-type', 'application/json');
         return res.status(200).json({ prodnuevo });
@@ -190,8 +195,9 @@ router.put("/:pid", async (req, res) => {
 
     try {
         let prodModific = await ProductsManager.updateProduct(pid, aModificar);
+        console.log("Producto Actualizado:", prodModific);
         res.setHeader('Content-type', 'application/json');
-        return res.status(200).json({ prodModific });
+        return res.status(200).json({ success: true, product: prodModific });        
     } catch (error) {
         console.log(error);
         res.setHeader('Content-type', 'application/json');
@@ -217,8 +223,10 @@ router.delete("/:pid", async (req, res) => {
     try {
         let prodresult = await ProductsManager.deleteProduct(pid);
         if (prodresult > 0) {
+            req.socket.emit("ProductoBorrado", pid);
             res.setHeader('Content-type', 'application/json');
             return res.status(200).json({ payload: `Producto Id ${pid} eliminado.` });
+
         } else {
             res.setHeader('Content-type', 'application/json');
             return res.status(500).json({ error: `Error al eliminar.` });

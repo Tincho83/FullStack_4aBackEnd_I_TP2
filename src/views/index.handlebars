@@ -1,17 +1,33 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Productos</title>
-</head>
-<body>
-    <h1>Lista de Productos</h1>
-    <ul>
-        {{#each products}}
-            <li>{{this.title}} - {{this.price}}</li>
-        {{/each}}
-    </ul>
-    <a href="/realtimeproducts">Ver en tiempo real</a>
-</body>
-</html>
+<h1>Listado de Productos</h1>
+<p>{{detalle}}</p>
+
+{{#each prodss}}
+<div class="divCardItem" style="display: flex; justify-content: center; align-items: center;">
+    <div class="CardItem" style="max-width: 300px;">
+        <div style="position: relative;">
+            {{#if status}}
+            <p>Disponible: Si</p>
+            {{else}}
+            <p>Disponible: No</p>
+            {{/if }}
+        </div>
+        <div class="Header">
+            {{#each thumbnails}}
+            <img src="{{urlmain}}" alt="{{title}}" style="border-radius: 12px;" class="ImgPic" />
+            {{/each}}
+            <div class="ItemData" style="margin-top: 24px; spacing: 12px;">
+                <p>{{category}}</p>
+                <h3 style="font-size: 1.5rem;">{{title}} - {{code}}</h3>
+                {{#if detalle}}
+                <p>{{description}}</p>
+                {{else}}
+                {{/if}}
+                <p style="color: #007BFF; font-size: 24px;">Price: $ {{price}}</p>
+            </div>
+        </div>
+        <div class="ItemCardFooter">
+        </div>
+        <!-- <div class="product"> <form action="/api/carts/:cartId/products/{{_id}}" method="post"> <input type="number" name="quantity" value="1" min="1"> <button type="submit">Add to Cart</button> </form> </div> -->
+    </div>
+</div>
+{{/each}}

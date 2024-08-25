@@ -29,7 +29,6 @@ class ProductsManager {
         await fs.promises.writeFile(this.path, JSON.stringify(prods, null, 5), {encoding: "utf-8"});
 
         return nuevoProd;
-
     }
 
     static async updateProduct(id, aModificar={}) {
@@ -49,7 +48,6 @@ class ProductsManager {
         await fs.promises.writeFile(this.path, JSON.stringify(prods, null, 5), {encoding: "utf-8"});
 
         return prods[indiceProd];
-
     }
 
     static async deleteProduct(id){

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos en Tiempo Real</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const socket = io();
+
+            // Manejar la actualización de la lista de productos
+            socket.on('productAdded', (product) => {
+                const ul = document.getElementById('product-list');
+                const li = document.createElement('li');
+                li.textContent = `${product.title} - ${product.price}`;
+                ul.appendChild(li);
+            });
+
+            socket.on('productDeleted', (id) => {
+                const ul = document.getElementById('product-list');
+                const items = ul.querySelectorAll('li');
+                items.forEach((item) => {
+                    if (item.textContent.includes(`ID: ${id}`)) {
+                        ul.removeChild(item);
+                    }
+                });
+            });
+
+            // Manejar el envío de productos
+            document.getElementById('add-product-form').addEventListener('submit', (event) => {
+                event.preventDefault();
+                const title = event.target.elements.title.value;
+                const price = event.target.elements.price.value;
+
+                socket.emit('addProduct', { title, price });
+            });
+
+            // Manejar la eliminación de productos
+            document.getElementById('product-list').addEventListener('click', (event) => {
+                if (event.target.classList.contains('delete-button')) {
+                    const id = event.target.dataset.id;
+                    socket.emit('deleteProduct', id);
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+
+    <h1>Listado de Productos</h1>
+    <p>{{detalle}}</p>
+
+    {{#each prodss}}
+    <div class="divCardItem" style="display: flex; justify-content: center; align-items: center;">
+        <div class="CardItem" style="max-width: 300px;">
+            <div style="position: relative;">
+                {{#if status}}
+                <p>Disponible: Si</p>
+                {{else}}
+                <p>Disponible: No</p>
+                {{/if }}
+            </div>
+            <div class="Header">
+                {{#each thumbnails}}
+                <img src="{{urlmain}}" alt="{{title}}" style="border-radius: 12px;" class="ImgPic" />
+                {{/each}}
+                <div class="ItemData" style="margin-top: 24px; spacing: 12px;">
+                    <p>{{category}}</p>
+                    <h3 style="font-size: 1.5rem;">{{title}} - {{code}}</h3>
+                    {{#if detalle}}
+                    <p>{{description}}</p>
+                    {{else}}
+                    {{/if}}
+                    <p style="color: #007BFF; font-size: 24px;">Price: $ {{price}}</p>
+                </div>
+            </div>
+            <div class="ItemCardFooter">
+                <div class="productDelete">
+                    <form action="/api/products/{{id}}" method="post">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button type="submit">Delete to Cart</button>
+                    </form>
+                </div>
+            </div>
+            <!-- <div class="product"> <form action="/api/carts/:cartId/products/{{_id}}" method="post"> <input type="number" name="quantity" value="1" min="1"> <button type="submit">Add to Cart</button> </form> </div> -->
+        </div>
+    </div>
+    {{/each}}
+
+
+    <h1>Productos en Tiempo Real</h1>
+    <form id="add-product-form">
+        <input type="text" name="title" placeholder="Título" required>
+        <input type="number" name="price" placeholder="Precio" required>
+        <button type="submit">Agregar Producto</button>
+    </form>
+    <ul id="product-list">
+        {{#each products}}
+        <li>
+            {{this.title}} - {{this.price}}
+            <button class="delete-button" data-id="{{this.id}}">Eliminar</button>
+        </li>
+        {{/each}}
+    </ul>
+
+
+    <hr>
+    <form action="/api/products" method="post">
+        <label>Title</label>
+        <input type="text" name="title" placeholder="Titulo" required>
+        <br>
+        <label>Description</label>
+        <input type="text" name="description" placeholder="Descripcion" required>
+        <br>
+        <label>Code</label>
+        <input type="text" name="code" placeholder="Codigo de Producto" required>
+        <br>
+        <label>Price</label>
+        <input type="text" name="price" placeholder="Precio" required>
+        <br>
+        <label>Stock</label>
+        <input type="text" name="stock" placeholder="Cantidad de productos" required>
+        <br>
+        <label>Category</label>
+        <input type="text" name="category" placeholder="Nombre de Categoria" required>
+
+        <input type="submit" value="Enviar">
+    </form>
+
+
+    <a href="/products">Ver lista de productos</a>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

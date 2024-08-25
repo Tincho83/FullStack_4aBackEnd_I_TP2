@@ -1,6 +1,6 @@
 ![image](/src/public/img/demo.PNG)
 # BackEnd I - PreEntregable TP2
-## _Servidor con endpoints y servicios para gestionar los productos y carritos de compra de un e-commerce._  
+## _Servidor con endpoints y servicios para gestionar los productos y carritos de compra de un e-commerce integrando vistas Handlebars y websocket._  
   
 ### Vista previa / Preview
 ![image](/src/public/img/demo.gif)
@@ -9,7 +9,7 @@
 [BackEnd I PreEntrega TP2](https://ecommbackend1b.netlify.app/) (No disponible por el momento.)
 
 ### Descripcion / Description
-Aplicativo Backend para e-commerce realizado en javascript, express para el curso de Backend I en CoderHouse.  
+Aplicativo Backend para e-commerce realizado en javascript, express, Handlebars y websocket para el curso de Backend I en CoderHouse.  
 
 
 ### Construccion / Building

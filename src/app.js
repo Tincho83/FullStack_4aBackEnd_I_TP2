@@ -1,95 +1,74 @@
+// **********  Importar Componentes  *****************
 const express = require("express");
 const fs = require("fs");
+const { join, path } = require("path");
+const { engine } = require("express-handlebars");
+const { Server } = require("socket.io");
+
 const { router: productsRouter } = require("../src/routes/products.router.js");
 const { router: cartsRouter } = require("../src/routes/carts.router.js");
-//
-const exphbs = require("express-handlebars");
-const path = require("path");
-const http = require("http");
-const socketIo = require("socket.io");
+const { router: viewsRouter } = require("../src/routes/views.router.js");
+
+const logMiddleware = require('./middlewares/logMiddleware.js');
+// ***************************************************
 
 
+
+// *****  Declaracion de variables y constantes  *****
 const PORT = 8080;
+let serverSocket; // Para poder importar desde CommonJS o ECS
+// ***************************************************
+
+
+
+// ************  Iniciar Express  ********************
 const app = express();
-//
-const server = http.createServer(app);
-const io = socketIo(server);
+// ***************************************************
 
-// Configurar Handlebars
-app.engine('handlebars', exphbs);
-app.set('view engine', 'handlebars');
-app.set('views', path.join(__dirname, 'views'));
 
-// Middleware para manejar JSON y formularios
+
+// ************  Middleware  ************************
+// *******  Para manejar JSON desde express  ********
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+let ruta = join(__dirname, "public"); // Para Recurso estatico
+app.use(express.static(ruta));
+//console.log(ruta);
 
-//
-app.use(express.static('public'))
+app.use(logMiddleware);
+// ***************************************************
 
-// Rutas
-app.use("/api/products", productsRouter);
+
+
+// ************  Handlebars  *************************
+app.engine('handlebars', engine());
+app.set('view engine', 'handlebars');
+let rutaviews = join(__dirname, '/views'); // Para vistas
+app.set('views', rutaviews);
+//console.log(rutapub);
+//app.set('views', './src/views');
+// ***************************************************
+
+
+
+// ********  Definir Routers Endpoints   ***************
+//app.use("/api/products", productsRouter);
+app.use("/api/products", //Middleware para usar websocket en productsRouter
+    (req, res, next) => {
+        req.socket = serverSocket;
+        next();
+    }, productsRouter);
 app.use("/api/carts/", cartsRouter);
+app.use("/", (req, res, next) => {
+    req.socket = serverSocket;
+    next();
+}, viewsRouter);
+// ***************************************************
 
-// Rutas para vistas
-app.get("/products", async (req, res) => {
-    let prodss;
-    try {
-        prodss = await ProductsManager.getProducts();
-    } catch (error) {
-        return res.status(500).json({ error: error.message });
-    }
-    res.render('index', { products: prodss });
-});
 
-app.get("/realtimeproducts", async (req, res) => {
-    let prodss;
-    try {
-        prodss = await ProductsManager.getProducts();
-    } catch (error) {
-        return res.status(500).json({ error: error.message });
-    }
-    res.render('realTimeProducts', { products: prodss });
-});
 
-app.get("/", (req, res) => {
-    console.log("url: ", req.url);
-
-    res.setHeader('Content-type', 'text/plain');
-    res.status(200).send("Pagina de Inicio de Express Server...[OK]");
-});
-
-// Configurar WebSocket
-io.on('connection', (socket) => {
-    console.log('Nuevo cliente conectado');
-
-    socket.on('addProduct', async (product) => {
-        try {
-            let newProduct = await ProductsManager.addProduct(product);
-            io.emit('productAdded', newProduct);
-        } catch (error) {
-            socket.emit('error', error.message);
-        }
-    });
-
-    socket.on('deleteProduct', async (id) => {
-        try {
-            let result = await ProductsManager.deleteProduct(id);
-            if (result > 0) {
-                io.emit('productDeleted', id);
-            }
-        } catch (error) {
-            socket.emit('error', error.message);
-        }
-    });
-
-    socket.on('disconnect', () => {
-        console.log('Cliente desconectado');
-    });
-});
-
- server.listen(PORT, () => console.log(`Servidor en línea sobre puerto ${PORT}`));
-/*const server = app.listen(PORT, () => console.log(`
+// ************  Server HTTP  ************************
+const serverHTTP = app.listen(PORT, () => console.log(`
 
 ***************************************                                    
 * Servidor en linea sobre puerto ${PORT} *
@@ -99,4 +78,56 @@ io.on('connection', (socket) => {
     http://localhost:${PORT}
 
 `));
-*/
+// ***************************************************
+
+
+
+// ************  Server WebSocket  *******************
+serverSocket = new Server(serverHTTP);
+// ***************************************************
+
+
+
+// ********  Configurar WebSocket  ******************
+serverSocket.on('connection', (socket) => {
+    console.log(`Nuevo cliente conectado: ${socket.id}`);
+
+    // B04.escucho el nuevo producto agregado proveniente de realtimeproducts.js
+    //    muestro en consola del app.js.
+    socket.on("nuevoProductoAgregado", nuevoProd => {
+        console.log('Producto agregado:', nuevoProd);
+        
+        // B05.emito señal de notificacion a todos menos al creador del
+        //    producto.
+        //socket.emit('nuevoProductoAgregadoaTodos', nuevoProd);
+        //socket.broadcast.emit("nuevoProductoAgregadoaTodos", nuevoProd);
+    });
+
+    socket.on("ProductoBorradoOtro", prodBorrado => {
+        console.log('Producto eliminado:', prodBorrado);
+        socket.emit('productoBorradoaTodos', prodBorrado);
+        socket.broadcast.emit("productoBorradoaTodos", prodBorrado);
+    });
+
+    socket.on('disconnect', () => {
+        console.log(`Cliente desconectado: ${socket.id}`);
+    });
+});
+// ***************************************************
+
+
+
+// ********  Ejemplo WebSocket Emit (Emitir) ************
+// Cada 1000ms (1seg) guardo en la variable "horahhmm" la hora actual y luego
+// la emito por websocket el valor de esa variable (horahhmm) como "HoraServidor".
+// Desde el archivo.js que quiera obtener esta informacion debo hacer "un socket.on"
+setInterval(() => {
+    //let fecha = new Date().toLocaleDateString();
+    let horahhmm = new Date();
+    //console.log(horahhmm);
+
+    // A01. emito señal de reloj
+    serverSocket.emit("HoraServidor", horahhmm);
+}, 1000);
+// ***************************************************
+
