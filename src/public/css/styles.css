@@ -100,6 +100,7 @@ body {
     list-style-type: none;
     padding: 0;
     margin-left: 10px;
+    justify-content: center;
 }
 
 .cabecera_divEnlacesHorizontales_ul_li {
@@ -112,10 +113,14 @@ body {
 
 .cabecera_Enlaces_img_p {
     margin: 10;
+    color:rgb(170, 190, 190);
 }
 
 #hhmm {
     font-size: x-large;
+    color: rgb(184, 29, 29);
+    margin-left: 20px;
+
 }
 
 #product-list {
@@ -199,4 +204,17 @@ label {
     border: none;
     border-radius: 8px;
     cursor: pointer;
+}
+
+.divFormProd {
+    flex: 1;
+    margin-left: 0px;
+    margin-right: 20px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+hr {
+    margin-top: 0px;
+    margin-bottom: 0px;
 }

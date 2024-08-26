@@ -96,7 +96,7 @@ setInterval(() => {
 
     // A01. emito evento de reloj
     serverSocket.emit("HoraServidor", horahhmmss);
-}, 1000);
+}, 500);
 // ***************************************************
 
 

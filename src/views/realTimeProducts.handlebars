@@ -1,76 +1,75 @@
 <h1>Listado de Productos</h1>
-<p>{{detalle}}</p>
 
 <div style="display: flex;">
-<div id="product-list">
+    <div id="product-list">
 
-    {{#each prodss}}
-    <div class="divCardItem" data-id="{{id}}">
-        <div class="CardItem">
-            <div class="diviCartItem">
-                {{#if status}}
-                <p>Disponible: Si</p>
-                {{else}}
-                <p>Disponible: No</p>
-                {{/if }}
-            </div>
-            <div class="Header">
-                {{#if thumbnails.length}}
-                {{#each thumbnails}}
-                <img src="{{urlmain}}" alt="{{title}}" class="ImgPic" />
-                {{/each}}
-                {{else}}
-                <img src="https://media.istockphoto.com/id/1216251206/vector/no-image-available-icon.jpg?s=612x612&w=0&k=20&c=6C0wzKp_NZgexxoECc8HD4jRpXATfcu__peSYecAwt0="
-                    alt="Sin Imagen" class="ImgPic" />
-                {{/if}}
-                <div class="ItemData">
-                    <p>{{category}}</p>
-                    <h3 style="font-size: 1.5rem;">{{title}} - {{code}}</h3>
-                    {{#if detalle}}
-                    <p>{{description}}</p>
+        {{#each prodss}}
+        <div class="divCardItem" data-id="{{id}}">
+            <div class="CardItem">
+                <div class="diviCartItem">
+                    {{#if status}}
+                    <p>Disponible: Si</p>
                     {{else}}
+                    <p>Disponible: No</p>
+                    {{/if }}
+                </div>
+                <div class="Header">
+                    {{#if thumbnails.length}}
+                    {{#each thumbnails}}
+                    <img src="{{urlmain}}" alt="{{title}}" class="ImgPic" />
+                    {{/each}}
+                    {{else}}
+                    <img src="https://media.istockphoto.com/id/1216251206/vector/no-image-available-icon.jpg?s=612x612&w=0&k=20&c=6C0wzKp_NZgexxoECc8HD4jRpXATfcu__peSYecAwt0="
+                        alt="Sin Imagen" class="ImgPic" />
                     {{/if}}
-                    <p class="ItemDataPrice">Price: $ {{price}}</p>
+                    <div class="ItemData">
+                        <p>{{category}}</p>
+                        <h3 style="font-size: 1.5rem;">{{title}} - {{code}}</h3>
+                        {{#if detalle}}
+                        <p>{{description}}</p>
+                        {{else}}
+                        {{/if}}
+                        <p class="ItemDataPrice">Price: $ {{price}}</p>
+                    </div>
+                </div>
+                <div class="ItemCardFooter">
+                    <button onclick="DeleteProduct({{id}})" id="btnDelete">Delete Product</button>
+                    <button
+                        onclick="ModifyProduct({{id}}, '{{title}}', '{{description}}', '{{code}}', {{price}}, {{stock}}, '{{category}}')"
+                        id="btnModify">Modify Product</button>
                 </div>
             </div>
-            <div class="ItemCardFooter">
-                <button onclick="DeleteProduct({{id}})" id="btnDelete">Delete Product</button>
-                <button
-                    onclick="ModifyProduct({{id}}, '{{title}}', '{{description}}', '{{code}}', {{price}}, {{stock}}, '{{category}}')"
-                    id="btnModify">Modify Product</button>
-            </div>
         </div>
+        {{/each}}
     </div>
-    {{/each}}
-</div>
 
-<hr>
+    <hr>
 
-<!-- Formulario para agregar productos -->
-<div style="flex: 1;"></div>
-<form action="/api/products" method="post" id="add-product-form">
-    <input type="hidden" id="productId" name="productId" />
-    <label>Title</label>
-    <input type="text" name="title" id="title" placeholder="Title" required>
-    <br>
-    <label>Description</label>
-    <input type="text" name="description" id="description" placeholder="Description" required>
-    <br>
-    <label>Code</label>
-    <input type="text" name="code" id="code" placeholder="Product Code" required>
-    <br>
-    <label>Price</label>
-    <input type="number" name="price" id="price" placeholder="Price" required>
-    <br>
-    <label>Stock</label>
-    <input type="number" name="stock" id="stock" placeholder="Stock Quantity" required>
-    <br>
-    <label>Category</label>
-    <input type="text" name="category" id="category" placeholder="Category Name" required>
-    <br>
-    <input type="submit" id="btnSubmit" value="Add Product">
-</form>
-</div>
+    <!-- Formulario para agregar productos -->
+    <div class="divFormProd">
+        <form action="/api/products" method="post" id="add-product-form">
+            <input type="hidden" id="productId" name="productId" />
+            <label>Title</label>
+            <input type="text" name="title" id="title" placeholder="Title" required>
+            <br>
+            <label>Description</label>
+            <input type="text" name="description" id="description" placeholder="Description" required>
+            <br>
+            <label>Code</label>
+            <input type="text" name="code" id="code" placeholder="Product Code" required>
+            <br>
+            <label>Price</label>
+            <input type="number" name="price" id="price" placeholder="Price" required>
+            <br>
+            <label>Stock</label>
+            <input type="number" name="stock" id="stock" placeholder="Stock Quantity" required>
+            <br>
+            <label>Category</label>
+            <input type="text" name="category" id="category" placeholder="Category Name" required>
+            <br>
+            <input type="submit" id="btnSubmit" value="Add Product">
+        </form>
+    </div>
 </div>
 
 
