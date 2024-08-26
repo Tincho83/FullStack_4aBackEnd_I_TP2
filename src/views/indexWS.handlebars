@@ -2,9 +2,8 @@
 <p>{{detalle}}</p>
 
 <div id="product-list">
-
     {{#each prodss}}
-    <div class="divCardItem" style="display: flex; justify-content: center; align-items: center;">
+    <div class="divCardItem" style="display: flex; justify-content: center; align-items: center;" data-id="{{id}}">
         <div class="CardItem" style="max-width: 300px;">
             <div style="position: relative;">
                 {{#if status}}
@@ -29,13 +28,14 @@
                     <p>{{description}}</p>
                     {{else}}
                     {{/if}}
-                    <p style="color: #007BFF; font-size: 24px;">Price: $ {{price}}</p>
+                    <p class="ItemDataPrice" style="color: #007BFF; font-size: 24px;">Price: $ {{price}}</p>
                 </div>
             </div>
-            <div class="ItemCardFooter">
-            </div>
-            <!-- <div class="product"> <form action="/api/carts/:cartId/products/{{_id}}" method="post"> <input type="number" name="quantity" value="1" min="1"> <button type="submit">Add to Cart</button> </form> </div> -->
         </div>
     </div>
     {{/each}}
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script defer src="js/index.js"></script>

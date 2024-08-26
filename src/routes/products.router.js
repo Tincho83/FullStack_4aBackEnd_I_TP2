@@ -127,10 +127,10 @@ router.post("/", async (req, res) => {
     try {
         let prodnuevo = await ProductsManager.addProduct({ title, description, code, price, status, stock, category, thumbnails });
 
-        // B01.emito señal de nuevo producto para escuchar en realtimeproducts.js
-        req.socket.emit("nuevoProducto", { title, description, code, price, status, stock, category, thumbnails });
-        //req.socket.broadcast.emit("ProductoAgregado", prodnuevo); // Agrega esta línea
+        // B001.emito evento de nuevo producto para escuchar en realtimeproducts.js
+        req.socket.emit("nuevoProducto", prodnuevo);
         console.log("Evento *nuevoProducto* emitido");
+        
 
         res.setHeader('Content-type', 'application/json');
         return res.status(200).json({ prodnuevo });
@@ -196,8 +196,13 @@ router.put("/:pid", async (req, res) => {
     try {
         let prodModific = await ProductsManager.updateProduct(pid, aModificar);
         console.log("Producto Actualizado:", prodModific);
+
+        // C001.emito evento de producto actualizado para escuchar en realtimeproducts.js
+        req.socket.emit("ProductoActualizado", prodModific );
+        console.log("Evento *ProductoActualizado* emitido");
+
         res.setHeader('Content-type', 'application/json');
-        return res.status(200).json({ success: true, product: prodModific });        
+        return res.status(200).json({ success: true, product: prodModific });
     } catch (error) {
         console.log(error);
         res.setHeader('Content-type', 'application/json');
@@ -223,7 +228,11 @@ router.delete("/:pid", async (req, res) => {
     try {
         let prodresult = await ProductsManager.deleteProduct(pid);
         if (prodresult > 0) {
-            req.socket.emit("ProductoBorrado", pid);
+
+            // D01.emito evento de producto borrado para escuchar en realtimeproducts.js
+            req.socket.emit("ProductoBorrado", pid);            
+            console.log("Evento *ProductoBorrado* emitido");
+
             res.setHeader('Content-type', 'application/json');
             return res.status(200).json({ payload: `Producto Id ${pid} eliminado.` });
 

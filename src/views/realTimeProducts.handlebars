@@ -1,48 +1,53 @@
 <h1>Listado de Productos</h1>
 <p>{{detalle}}</p>
 
+<div style="display: flex;">
+<div id="product-list">
 
-<div id="product-list"></div>
-{{#each prodss}}
-<div class="divCardItem" style="display: flex; justify-content: center; align-items: center;" data-id="{{id}}">
-    <div class="CardItem" style="max-width: 300px;">
-        <div style="position: relative;">
-            {{#if status}}
-            <p>Disponible: Si</p>
-            {{else}}
-            <p>Disponible: No</p>
-            {{/if }}
-        </div>
-        <div class="Header">
-            {{#if thumbnails.length}}
-            {{#each thumbnails}}
-            <img src="{{urlmain}}" alt="{{title}}" style="border-radius: 12px;" class="ImgPic" />
-            {{/each}}
-            {{else}}
-            <img src="https://media.istockphoto.com/id/1216251206/vector/no-image-available-icon.jpg?s=612x612&w=0&k=20&c=6C0wzKp_NZgexxoECc8HD4jRpXATfcu__peSYecAwt0="
-                alt="Sin Imagen" style="border-radius: 12px;" class="ImgPic" />
-            {{/if}}
-            <div class="ItemData" style="margin-top: 24px; spacing: 12px;">
-                <p>{{category}}</p>
-                <h3 style="font-size: 1.5rem;">{{title}} - {{code}}</h3>
-                {{#if detalle}}
-                <p>{{description}}</p>
+    {{#each prodss}}
+    <div class="divCardItem" data-id="{{id}}">
+        <div class="CardItem">
+            <div class="diviCartItem">
+                {{#if status}}
+                <p>Disponible: Si</p>
                 {{else}}
+                <p>Disponible: No</p>
+                {{/if }}
+            </div>
+            <div class="Header">
+                {{#if thumbnails.length}}
+                {{#each thumbnails}}
+                <img src="{{urlmain}}" alt="{{title}}" class="ImgPic" />
+                {{/each}}
+                {{else}}
+                <img src="https://media.istockphoto.com/id/1216251206/vector/no-image-available-icon.jpg?s=612x612&w=0&k=20&c=6C0wzKp_NZgexxoECc8HD4jRpXATfcu__peSYecAwt0="
+                    alt="Sin Imagen" class="ImgPic" />
                 {{/if}}
-                <p style="color: #007BFF; font-size: 24px;">Price: $ {{price}}</p>
+                <div class="ItemData">
+                    <p>{{category}}</p>
+                    <h3 style="font-size: 1.5rem;">{{title}} - {{code}}</h3>
+                    {{#if detalle}}
+                    <p>{{description}}</p>
+                    {{else}}
+                    {{/if}}
+                    <p class="ItemDataPrice">Price: $ {{price}}</p>
+                </div>
+            </div>
+            <div class="ItemCardFooter">
+                <button onclick="DeleteProduct({{id}})" id="btnDelete">Delete Product</button>
+                <button
+                    onclick="ModifyProduct({{id}}, '{{title}}', '{{description}}', '{{code}}', {{price}}, {{stock}}, '{{category}}')"
+                    id="btnModify">Modify Product</button>
             </div>
         </div>
-        <div class="ItemCardFooter">
-            <button onclick="DeleteProduct({{id}})" id="btnDelete">Delete Product</button>
-            <button onclick="ModifyProduct({{id}}, '{{title}}', '{{description}}', '{{code}}', {{price}}, {{stock}}, '{{category}}')" id="btnModify">Modify Product</button>
-        </div>
     </div>
-</div>
-{{/each}}
+    {{/each}}
 </div>
 
 <hr>
+
 <!-- Formulario para agregar productos -->
+<div style="flex: 1;"></div>
 <form action="/api/products" method="post" id="add-product-form">
     <input type="hidden" id="productId" name="productId" />
     <label>Title</label>
@@ -65,10 +70,11 @@
     <br>
     <input type="submit" id="btnSubmit" value="Add Product">
 </form>
+</div>
+</div>
 
 
-<a href="/products">Ver lista de productos</a>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="/socket.io/socket.io.js"></script>
-<script src="js/realtimeproducts.js"></script>
+<script defer src="js/realtimeproducts.js"></script>

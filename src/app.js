@@ -1,6 +1,7 @@
 // **********  Importar Componentes  *****************
 const express = require("express");
 const fs = require("fs");
+const moment = require("moment");
 const { join, path } = require("path");
 const { engine } = require("express-handlebars");
 const { Server } = require("socket.io");
@@ -88,26 +89,42 @@ serverSocket = new Server(serverHTTP);
 
 
 
+// ****************   WebSockets  ********************
+// Cada 1000ms (1seg) emito la hora actual para mostrarse en menu.handlebars
+setInterval(() => {
+    let horahhmmss = moment().format('DD/MM/yyyy hh:mm:ss');
+
+    // A01. emito evento de reloj
+    serverSocket.emit("HoraServidor", horahhmmss);
+}, 1000);
+// ***************************************************
+
+
+
 // ********  Configurar WebSocket  ******************
 serverSocket.on('connection', (socket) => {
-    console.log(`Nuevo cliente conectado: ${socket.id}`);
 
-    // B04.escucho el nuevo producto agregado proveniente de realtimeproducts.js
-    //    muestro en consola del app.js.
-    socket.on("nuevoProductoAgregado", nuevoProd => {
-        console.log('Producto agregado:', nuevoProd);
-        
-        // B05.emito señal de notificacion a todos menos al creador del
-        //    producto.
-        //socket.emit('nuevoProductoAgregadoaTodos', nuevoProd);
-        //socket.broadcast.emit("nuevoProductoAgregadoaTodos", nuevoProd);
-    });
+    let dato;
+    let sessionTime = moment().format('DD/MM/yyyy hh:mm:ss');
 
-    socket.on("ProductoBorradoOtro", prodBorrado => {
-        console.log('Producto eliminado:', prodBorrado);
-        socket.emit('productoBorradoaTodos', prodBorrado);
-        socket.broadcast.emit("productoBorradoaTodos", prodBorrado);
-    });
+    console.log(`Nuevo cliente conectado: ${socket.id} a las ${sessionTime}`);
+
+    /*
+        socket.on("borreProd", dato => {
+            console.log(`El cliente ${socket.id} borro el prod: ${dato}`);
+            socket.broadcast.emit("HuboCambiosD", dato);
+        });
+    
+        socket.on("ActuaProd", dato => {
+            console.log(`El cliente ${socket.id} actualizo el prod: ${dato.id}`);
+            socket.broadcast.emit("HuboCambiosU", dato);
+        });
+    
+        socket.on("agregProd", dato => {
+            console.log(`El cliente ${socket.id} agrego el prod: ${dato}`);
+            socket.broadcast.emit("HuboCambiosC", dato);
+        });
+    */
 
     socket.on('disconnect', () => {
         console.log(`Cliente desconectado: ${socket.id}`);
@@ -117,17 +134,5 @@ serverSocket.on('connection', (socket) => {
 
 
 
-// ********  Ejemplo WebSocket Emit (Emitir) ************
-// Cada 1000ms (1seg) guardo en la variable "horahhmm" la hora actual y luego
-// la emito por websocket el valor de esa variable (horahhmm) como "HoraServidor".
-// Desde el archivo.js que quiera obtener esta informacion debo hacer "un socket.on"
-setInterval(() => {
-    //let fecha = new Date().toLocaleDateString();
-    let horahhmm = new Date();
-    //console.log(horahhmm);
 
-    // A01. emito señal de reloj
-    serverSocket.emit("HoraServidor", horahhmm);
-}, 1000);
-// ***************************************************
 

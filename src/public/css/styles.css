@@ -1,3 +1,8 @@
+h1 {
+    border-bottom: 5px solid #000000;
+    margin-bottom: 0px;
+}
+
 .product {
     background-color: aqua;
 }
@@ -27,7 +32,8 @@
     align-items: center !important;
     display: inline !important;
     height: 250px;
-    width: 284px;
+    width: 250px;
+    border-radius: 12px;
 }
 
 .cabecera_Enlaces_img {
@@ -87,4 +93,110 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
+}
+
+.cabecera_divEnlacesHorizontales_ul {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+    margin-left: 10px;
+}
+
+.cabecera_divEnlacesHorizontales_ul_li {
+    margin-right: 20px;
+}
+
+.cabecera_Enlaces_img_a {
+    text-decoration: none;
+}
+
+.cabecera_Enlaces_img_p {
+    margin: 10;
+}
+
+#hhmm {
+    font-size: x-large;
+}
+
+#product-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.divCardItem {
+    flex: 1 1 300px;
+    max-width: 300px;
+    margin: 10px;
+}
+
+.CardItem {
+    /*max-width: 300px;*/
+    padding: 0;
+}
+
+.diviCartItem {
+    position: relative;
+}
+
+.ItemDataPrice {
+    color: #007BFF;
+    font-size: 24px;
+}
+
+.ItemCardFooter {
+    display: flex;
+    justify-content: space-between;
+    /* Espacia los botones por todo el ancho disponible */
+    gap: 10px;
+    /* Espaciado entre los botones */
+}
+
+.ItemCardFooter button {
+    background-color: rgb(5, 82, 82);
+    font-size: 1.1rem;
+    /* Aumenta el tamaño del texto */
+    padding: 10px 20px;
+    /* Aumenta el tamaño del botón */
+    margin-right: 10px;
+    /* Espaciado entre botones */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    flex: 1;
+    /* Hace que los botones ocupen el mismo espacio */
+    width: 100%;
+}
+
+.ItemCardFooter button:last-child {
+    margin-right: 0;
+    /* Elimina el margen del último botón */
+}
+
+.ItemCardFooter button:hover {
+    background-color: #023132;
+    /* Cambia el color al pasar el ratón */
+}
+
+#title, #description, #code, #price, #stock, #category {
+    font-size: 1.25rem;
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 16px;
+}
+
+label {
+    font-size: 1.5rem;
+    display: block;
+    margin-bottom: 8px;
+}
+
+#btnSubmit{
+    font-size: 1.5rem;
+    padding: 12px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
 }
