@@ -471,16 +471,5 @@
           "stock": 3,
           "category": "Infusion",
           "thumbnails": []
-     },
-     {
-          "id": 36,
-          "title": "te",
-          "description": "Te en 5 minutos",
-          "code": "TEPR05",
-          "price": 32,
-          "status": true,
-          "stock": 3,
-          "category": "Infusion",
-          "thumbnails": []
      }
 ]

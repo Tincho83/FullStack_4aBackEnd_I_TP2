@@ -10,6 +10,7 @@ router.post("/", async (req, res) => {
 
     const { products = [] } = req.body;
 
+
     let carts = await CartsManager.getCarts();
 
     let id = 1;
@@ -104,6 +105,8 @@ router.post("/:cid/product/:pid", async (req, res) => {
         res.setHeader('Content-type', 'application/json');
         res.status(500).send('Error al agregar el producto al carrito');
     }
+
 });
 
 module.exports = { router };
+

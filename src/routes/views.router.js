@@ -31,6 +31,7 @@ router.get('/products', async (req, res) => {
         });
     }
 
+
     res.setHeader('Content-type', 'text/html');
     res.status(200).render("index", {
         detalle,
@@ -68,3 +69,5 @@ router.get('/realtimeproducts', async (req, res) => {
 });
 
 module.exports = { router };
+
+

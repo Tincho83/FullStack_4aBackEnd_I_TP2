@@ -25,10 +25,10 @@ app.use(logMiddleware);
 
 app.engine('handlebars', engine());
 app.set('view engine', 'handlebars');
-let rutaviews = join(__dirname, '/views');
+let rutaviews = join(__dirname, '/views'); 
 app.set('views', rutaviews);
 
-app.use("/api/products",
+app.use("/api/products", 
     (req, res, next) => {
         req.socket = serverSocket;
         next();
@@ -38,6 +38,7 @@ app.use("/", (req, res, next) => {
     req.socket = serverSocket;
     next();
 }, viewsRouter);
+
 
 const serverHTTP = app.listen(PORT, () => console.log(`
 
@@ -54,11 +55,14 @@ serverSocket = new Server(serverHTTP);
 
 setInterval(() => {
     let horahhmmss = moment().format('DD/MM/yyyy hh:mm:ss');
+
     serverSocket.emit("HoraServidor", horahhmmss);
 }, 500);
 
+
 serverSocket.on('connection', (socket) => {
 
+    let dato;
     let sessionTime = moment().format('DD/MM/yyyy hh:mm:ss');
 
     console.log(`Nuevo cliente conectado: ${socket.id} a las ${sessionTime}`);
