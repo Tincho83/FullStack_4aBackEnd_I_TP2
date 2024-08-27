@@ -63,6 +63,11 @@ function ModifyProduct(id, title, description, code, price, stock, category) {
 
     addstatus = false;
 
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+
     document.getElementById('productId').value = id;
     document.getElementById('title').value = title;
     document.getElementById('description').value = description;
@@ -165,9 +170,9 @@ function agregarProductoAlDOM(product) {
 
     const newItem = document.createElement('div');
     newItem.className = 'divCardItem';
-    newItem.style.display = 'flex';
-    newItem.style.justifyContent = 'center';
-    newItem.style.alignItems = 'center';
+    //newItem.style.display = 'flex';
+    //newItem.style.justifyContent = 'center';
+    //newItem.style.alignItems = 'center';
     newItem.dataset.id = product.id;
 
     let disp = product.status ? "Si" : "No";
@@ -184,21 +189,21 @@ function agregarProductoAlDOM(product) {
     }
 
     newItem.innerHTML = `
-        <div class="CardItem" style="max-width: 300px;">
-            <div style="position: relative;">
+        <div class="CardItem">
+            <div class="diviCartItem">
                 <p>Disponible: ${disp}</p>
             </div>
             <div class="Header">
-                <img src="${img}" alt="${alt}" style="border-radius: 12px;" class="ImgPic" />
-                <div class="ItemData" style="margin-top: 24px; spacing: 12px;">
+                <img src="${img}" alt="${alt}" class="ImgPic" />
+                <div class="ItemData">
                     <p>${product.category}</p>
                     <h3 style="font-size: 1.5rem;">${product.title} - ${product.code}</h3>
-                    <p style="color: #007BFF; font-size: 24px;">Price: $ ${product.price}</p>
+                    <p class="ItemDataPrice">Price: $ ${product.price}</p>
                 </div>
             </div>
             <div class="ItemCardFooter">
                 <button onclick="DeleteProduct(${product.id})" id="btnDelete">Delete Product</button>
-                <button onclick="ModifyProduct(${product.id}, '${product.title}', '${product.description}', '${product.code}', ${product.price}, ${product.stock}, '${product.category}' )" id="btnModify">Modify Product</button>
+                <button onclick="ModifyProduct(${product.id}, '${product.title}', '${product.description}', '${product.code}', ${product.price}, ${product.stock}, '${product.category}')" id="btnModify">Modify Product</button>
             </div>        
         </div>
     `;
@@ -208,6 +213,7 @@ function agregarProductoAlDOM(product) {
 
 
 socket.on("ProductoActualizado", Prodactuald => {
+    //console.log("Evento *ProductoActualizado* recibido", Prodactuald);
     actualizarProductoEnDOM(Prodactuald);
 });
 
@@ -215,6 +221,7 @@ function actualizarProductoEnDOM(product) {
     const productElement = document.querySelector(`[data-id="${product.id}"]`);
 
     if (productElement) {
+        //console.log("Producto encontrado en DOM, actualizando...");
         productElement.querySelector('.ItemData p').innerText = product.category;
         productElement.querySelector('.ItemData h3').innerText = `${product.title} - ${product.code}`;
         productElement.querySelector('.ItemDataPrice').innerText = `Price: $ ${product.price}`;
@@ -223,6 +230,8 @@ function actualizarProductoEnDOM(product) {
         if (btnModify) {
             btnModify.setAttribute('onclick', `ModifyProduct(${product.id}, '${product.title}', '${product.description}', '${product.code}', ${product.price}, ${product.stock}, '${product.category}')`);
         }
+    } else {
+        //console.log("Producto no encontrado en el DOM");
     }
 }
 
@@ -237,4 +246,17 @@ function eliminarProductoDelDOM(productId) {
     if (productItem) {
         productItem.remove();
     }
+}
+
+let pFecha = document.getElementById("DateLastAccess");
+
+formatCurrentDate();
+
+function formatCurrentDate() {
+    const today = new Date();
+    const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+    const formatter = new Intl.DateTimeFormat('en-GB', options);
+    const formattedDate = formatter.format(today);
+
+    pFecha.textContent = `Fecha de Último Acceso: ${formattedDate}`;
 }
