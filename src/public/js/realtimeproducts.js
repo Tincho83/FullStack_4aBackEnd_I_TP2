@@ -1,11 +1,5 @@
-// ********  Ejemplo WebSocket On (Escucha) ******************
-// Genero la variable global "socket = io(); para inicializar el websocket.
-const socket = io(); // declarar una vez sobre el archivo.
-// ***************************************************
+const socket = io();
 
-
-
-// *****  Declaracion de variables y constantes  *****
 let addstatus = true;
 let divHora = document.getElementById("hhmm");
 
@@ -17,16 +11,9 @@ const inputStock = document.getElementById("stock");
 const inputCateg = document.getElementById("category");
 const btnSubmit = document.getElementById("btnSubmit");
 const productListDiv = document.getElementById("product-list");
-// ***************************************************
 
-
-
-// ****************  Eventos DOM  y Funciones Principales ***********************
-
-// *** Agregar Producto desde Boton.
 btnSubmit.addEventListener("click", async (e) => {
     e.preventDefault();
-    //console.log("Agregar un Producto. ",addstatus);
 
     if (document.getElementById('btnSubmit').value == "Add Product") {
         addstatus = true;
@@ -40,7 +27,6 @@ btnSubmit.addEventListener("click", async (e) => {
             category: inputCateg.value
         };
 
-        // Validar que todos los campos estén completos
         if (!product.title || !product.description || !product.code || !product.price || !product.stock || !product.category) {
             alert('Comprobar datos ingresados. Todos los campos son obligatorios.');
             return;
@@ -73,7 +59,6 @@ btnSubmit.addEventListener("click", async (e) => {
 });
 
 
-// *** Funcion modificar Producto desde Boton.
 function ModifyProduct(id, title, description, code, price, stock, category) {
 
     addstatus = false;
@@ -86,12 +71,10 @@ function ModifyProduct(id, title, description, code, price, stock, category) {
     document.getElementById('stock').value = stock;
     document.getElementById('category').value = category;
 
-    // Cambiar el nombre del boton Submit a 'Modify Product'
     const submitButton = document.getElementById('btnSubmit');
     submitButton.innerText = 'Modify Product';
     document.getElementById('btnSubmit').value = "Modify Product";
 
-    // Cambiar la funcion del boton para modificar el producto existente
     submitButton.onclick = function (event) {
         if (document.getElementById('btnSubmit').value == "Modify Product") {
 
@@ -108,10 +91,6 @@ function ModifyProduct(id, title, description, code, price, stock, category) {
                 category: document.getElementById('category').value
             };
 
-            //console.log(updatedProductId);
-            //console.log(JSON.stringify(updatedProduct));
-
-            // Enviar la solicitud PUT para actualizar el producto
             fetch(`/api/products/${updatedProductId.id}`, {
                 method: 'PUT',
                 headers: {
@@ -146,9 +125,7 @@ function ModifyProduct(id, title, description, code, price, stock, category) {
 }
 
 
-// *** Borrar Producto desde Boton.
 function DeleteProduct(productId) {
-    //console.log("Id: ", productId);
     if (confirm(`Deseas borrar el producto id ${productId}?`)) {
         fetch(`/api/products/${productId}`, {
             method: 'DELETE'
@@ -169,41 +146,18 @@ function DeleteProduct(productId) {
             });
     }
 }
-// ******************************************************************************
 
-
-
-// ********************  Escuchas WebSocket y funciones ************************
-
-// *****************************************************************************
-// A02. escucho evento de reloj y asigno a un componente DOM
 socket.on("HoraServidor", datosrecib => {
     divHora.textContent = `Hora: ${datosrecib}`;
 });
-// *****************************************************************************
 
-
-
-// *****************************************************************************
-// B002.escucho evento y muestro en consola del navegador cliente el nuevo producto
 socket.on("nuevoProducto", nuevoProd => {
-    //console.log(`Se creo el producto "${nuevoProd.title} - ${nuevoProd.code}"`, nuevoProd);
-    /*
-    socket.emit("agregProd", nuevoProd.title);
-    socket.on("HuboCambiosC", dato =>{
-    console.log("Otra sesion agrego el prod id: ", dato);
-    });
-    */
-
     agregarProductoAlDOM(nuevoProd);
 });
 
-
-// Función para agregar un nuevo producto al DOM
 function agregarProductoAlDOM(product) {
     const productList = document.getElementById('product-list');
 
-    // Verifica si productList existe
     if (!productList) {
         console.error('El elemento con id "product-list" no existe en el DOM.');
         return;
@@ -215,7 +169,6 @@ function agregarProductoAlDOM(product) {
     newItem.style.justifyContent = 'center';
     newItem.style.alignItems = 'center';
     newItem.dataset.id = product.id;
-    //newItem.setAttribute('data-id', product.id);
 
     let disp = product.status ? "Si" : "No";
 
@@ -252,26 +205,12 @@ function agregarProductoAlDOM(product) {
 
     productList.appendChild(newItem);
 }
-// *****************************************************************************
 
 
-
-// *****************************************************************************
-// C002.escucho evento y muestro en consola del navegador cliente el producto actualizado
 socket.on("ProductoActualizado", Prodactuald => {
-    //console.log('Producto actualizado:', Prodactuald);
-    /*
-    socket.emit("ActuaProd", Prodactuald);
-    socket.on("HuboCambiosU", dato =>{
-        console.log("Otra sesion actualizo el prod id: ", dato);
-    });
-    */
-
-    //actualizar la vista en otras sesiones
     actualizarProductoEnDOM(Prodactuald);
 });
 
-// Funcion para actualizar un producto del DOM
 function actualizarProductoEnDOM(product) {
     const productElement = document.querySelector(`[data-id="${product.id}"]`);
 
@@ -286,32 +225,16 @@ function actualizarProductoEnDOM(product) {
         }
     }
 }
-// *****************************************************************************
 
 
-
-// *****************************************************************************
-// D002.escucho evento de producto actualizado.
 socket.on("ProductoBorrado", Prodborrado => {
-    //console.log('Producto borrado:', Prodborrado);    
-    /*
-    socket.emit("borreProd", Prodborrado);
-    socket.on("HuboCambiosD", dato =>{
-        console.log("Otra sesion borro el prod id: ", dato);
-    });
-    */
-
-    //actualizar la vista en otras sesiones
     eliminarProductoDelDOM(Prodborrado);
 });
 
 
-// Funcion para eliminar un producto del DOM
 function eliminarProductoDelDOM(productId) {
     const productItem = document.querySelector(`[data-id="${productId}"]`);
     if (productItem) {
         productItem.remove();
     }
 }
-// *****************************************************************************
-

@@ -5,9 +5,7 @@ const router = Router();
 
 router.get("/", (req, res) => {
     console.log("url: ", req.url);
-    //res.setHeader('Content-type', 'text/plain');
-    //res.status(200).send("Pagina de Inicio de Express Server...[OK]");
-    let titulo = "Home";
+    let titulo = "Bienvenido al Portal de Acceso a Productos";
     res.setHeader('Content-type', 'text/html');
     res.status(200).render("home", { titulo });
 });
@@ -24,7 +22,6 @@ router.get('/products', async (req, res) => {
 
     try {
         prodss = await ProductsManager.getProducts();
-        //console.log(prodss);
     } catch (error) {
         console.log(error);
         res.setHeader('Content-type', 'application/json');
@@ -33,7 +30,6 @@ router.get('/products', async (req, res) => {
             detalle: `${error.message}`
         });
     }
-
 
     res.setHeader('Content-type', 'text/html');
     res.status(200).render("index", {
@@ -72,5 +68,3 @@ router.get('/realtimeproducts', async (req, res) => {
 });
 
 module.exports = { router };
-
-
